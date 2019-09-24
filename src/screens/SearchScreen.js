@@ -8,6 +8,10 @@ import ResultsList from '../components/ResultsList'
 const SearchScreen = () => {
     const [term, setTerm] = useState('')
     const [searchApi, results] = useResults()
+
+    useEffect(() => {
+        searchApi('asian')
+    }, [])
     
     const filterResultsByPrice = (price) => {
         return results.filter(result => {
@@ -20,7 +24,7 @@ const SearchScreen = () => {
             return(
                 <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                         <Text style={styles.emptyLabelStyle}>
-                            No recent search results
+                            No search results
                         </Text>
                         <Text style={styles.descriptionStyle}>
                             Your search results will appear here.

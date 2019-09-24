@@ -11,7 +11,6 @@ const ResultsDetail = ({ result, navigation }) => {
                 source={{ uri: result.image_url}}
             >
             </Image>
-            <Text style={styles.nameStyle}>{result.name}</Text>
             <Text>
                 {result.rating} Stars, {result.review_count}
             </Text>

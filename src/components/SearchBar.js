@@ -7,7 +7,7 @@ const SearchBar = ({ term, onTermChange, onTermSubmit }) => {
         <View style={styles.backgroundStyle}>
             <TextInput 
                 style={styles.inputStyle} 
-                placeholder='Search for restaurants'
+                placeholder='Try to search for "asian food"'
                 value={term}
                 onChangeText={newTerm => onTermChange(newTerm)}
                 onEndEditing={onTermSubmit}
@@ -21,7 +21,7 @@ const SearchBar = ({ term, onTermChange, onTermSubmit }) => {
 
 const styles = StyleSheet.create({
     backgroundStyle: {
-        marginTop: 25,
+        marginTop: 45,
         marginBottom: 25,
         backgroundColor: 'white',
         height: 45,
@@ -31,16 +31,17 @@ const styles = StyleSheet.create({
         shadowColor: "#000",
         shadowOpacity: 0.18,
         shadowRadius: 10,
-        elevation: 10,
+        elevation: 10
     },
     inputStyle: {
         flex: 1,
         marginLeft: 15,
-        fontSize: 16
+        fontSize: 14
     },
     iconStyle: {
         fontSize: 20,
         alignSelf: 'center',
+        color: 'gray',
         marginHorizontal: 15
     }
 })
