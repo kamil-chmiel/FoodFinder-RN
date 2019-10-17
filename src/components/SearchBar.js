@@ -1,49 +1,49 @@
-import React from 'react'
-import { View, StyleSheet, TextInput } from 'react-native'
-import { Feather } from '@expo/vector-icons'
+import React from "react";
+import { View, StyleSheet, TextInput } from "react-native";
+import { Feather } from "@expo/vector-icons";
 
 const SearchBar = ({ term, onTermChange, onTermSubmit }) => {
-    return (
-        <View style={styles.backgroundStyle}>
-            <TextInput 
-                style={styles.inputStyle} 
-                placeholder='Try to search for "asian food"'
-                value={term}
-                onChangeText={newTerm => onTermChange(newTerm)}
-                onEndEditing={onTermSubmit}
-                autoCapitalize='none'
-                autoCorrect={false}
-            />
-            <Feather style={styles.iconStyle} name='search'/>
-        </View>
-    )
-}
+  return (
+    <View style={styles.backgroundStyle}>
+      <TextInput
+        style={styles.inputStyle}
+        placeholder='Try to search for "asian food"'
+        value={term}
+        onChangeText={newTerm => onTermChange(newTerm)}
+        onEndEditing={onTermSubmit}
+        autoCapitalize="none"
+        autoCorrect={false}
+      />
+      <Feather style={styles.iconStyle} name="search" />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-    backgroundStyle: {
-        marginTop: 45,
-        marginBottom: 25,
-        backgroundColor: 'white',
-        height: 45,
-        borderRadius: 5,
-        marginHorizontal: 15,
-        flexDirection: 'row',
-        shadowColor: "#000",
-        shadowOpacity: 0.18,
-        shadowRadius: 10,
-        elevation: 10
-    },
-    inputStyle: {
-        flex: 1,
-        marginLeft: 15,
-        fontSize: 14
-    },
-    iconStyle: {
-        fontSize: 20,
-        alignSelf: 'center',
-        color: 'gray',
-        marginHorizontal: 15
-    }
-})
+  backgroundStyle: {
+    marginTop: 30,
+    marginBottom: 25,
+    backgroundColor: "white",
+    height: 45,
+    borderRadius: 5,
+    marginHorizontal: 15,
+    flexDirection: "row",
+    shadowColor: "#000",
+    shadowOpacity: 0.18,
+    shadowRadius: 10,
+    elevation: 10
+  },
+  inputStyle: {
+    flex: 1,
+    marginLeft: 15,
+    fontSize: 14
+  },
+  iconStyle: {
+    fontSize: 20,
+    alignSelf: "center",
+    color: "gray",
+    marginHorizontal: 15
+  }
+});
 
-export default SearchBar
+export default SearchBar;
