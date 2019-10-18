@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import ResultsDetail from "./ResultsDetail";
 import { withNavigation } from "react-navigation";
+import { Transition } from "react-navigation-fluid-transitions";
 
 const ResultsList = ({ title, results, navigation }) => {
   if (!results.length) {
@@ -29,7 +30,9 @@ const ResultsList = ({ title, results, navigation }) => {
                 navigation.navigate("RestaurantDetails", { id: item.id })
               }
             >
-              <ResultsDetail result={item} />
+              <Transition shared="photo">
+                <ResultsDetail result={item} />
+              </Transition>
             </TouchableOpacity>
           );
         }}
