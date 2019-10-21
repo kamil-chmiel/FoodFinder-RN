@@ -23,6 +23,7 @@ import { Transition } from "react-navigation-fluid-transitions";
 import useResults from "../hooks/useResults";
 import Review from "../components/Review";
 import StarRating from "react-native-star-rating";
+import MapView, { Marker } from "react-native-maps";
 
 const RestaurantDetailsScreen = ({ navigation }) => {
   const [restaurant, setRestaurant] = useState(null);
@@ -116,6 +117,29 @@ const RestaurantDetailsScreen = ({ navigation }) => {
     }
   };
 
+  const renderMap = () => {
+    return (
+      <View>
+        <Text style={reviewsTitleStyle}>Map</Text>
+        <MapView
+          style={{ width: "100%", height: 200 }}
+          scrollEnabled={false}
+          initialRegion={{
+            latitude: restaurant.coordinates.latitude,
+            longitude: restaurant.coordinates.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421
+          }}
+        >
+          <Marker
+            coordinate={restaurant.coordinates}
+            image={require("../assets/restaurant.png")}
+          />
+        </MapView>
+      </View>
+    );
+  };
+
   return (
     <View style={{ flex: 1 }}>
       <ScrollView>
@@ -186,6 +210,7 @@ const RestaurantDetailsScreen = ({ navigation }) => {
             </Text>
           </View>
         </View>
+        {renderMap()}
         {renderReviews()}
       </ScrollView>
       <TouchableOpacity

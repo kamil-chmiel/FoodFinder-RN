@@ -16,7 +16,9 @@ export default () => {
         }
       });
       setResults(response.data.businesses);
-      callback();
+      if (callback !== null) {
+        callback();
+      }
     } catch (error) {
       Alert.alert("Error", error);
     }

@@ -6,7 +6,8 @@ import {
   Alert,
   ScrollView,
   Platform,
-  SafeAreaView
+  SafeAreaView,
+  TouchableOpacity
 } from "react-native";
 import SearchBar from "../components/SearchBar";
 import api from "../api/api";
@@ -15,8 +16,10 @@ import ResultsList from "../components/ResultsList";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import { DotsLoader } from "react-native-indicator";
+import { Foundation } from "@expo/vector-icons";
+import Constants from "expo-constants";
 
-const SearchScreen = () => {
+const SearchScreen = ({ navigation }) => {
   const [term, setTerm] = useState("");
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
@@ -24,14 +27,14 @@ const SearchScreen = () => {
   const [searchApi, results] = useResults();
 
   useEffect(() => {
-    if (Platform.OS === "android" && !Constants.isDevice) {
-      this.setState({
-        errorMessage:
-          "Oops, this will not work on Sketch in an Android emulator. Try it on your device!"
-      });
-    } else {
-      this._getLocationAsync();
-    }
+    // if (Platform.OS === "android" && !Constants.isDevice) {
+    //   this.setState({
+    //     errorMessage:
+    //       "Oops, this will not work on Sketch in an Android emulator. Try it on your device!"
+    //   });
+    // } else {
+    this._getLocationAsync();
+    // }
   }, []);
 
   _getLocationAsync = async () => {
@@ -41,15 +44,27 @@ const SearchScreen = () => {
       let location = await Location.getCurrentPositionAsync({});
       setLatitude(location.coords.latitude);
       setLongitude(location.coords.longitude);
-      searchApi("food", latitude, longitude, () => {
-        setSearching(false);
-      });
+      searchApi(
+        "food",
+        location.coords.latitude,
+        location.coords.longitude,
+        () => {
+          setSearching(false);
+        }
+      );
     }
   };
 
   const filterResultsByPrice = price => {
     return results.filter(result => {
       return result.price === price;
+    });
+  };
+
+  const routeToMap = () => {
+    navigation.navigate("Map", {
+      currentPosition: { latitude, longitude },
+      restaurants: results
     });
   };
 
@@ -112,9 +127,16 @@ const SearchScreen = () => {
         <SearchBar
           term={term}
           onTermChange={setTerm}
-          onTermSubmit={() => searchApi(term, latitude, longitude)}
+          onTermSubmit={() => searchApi(term, latitude, longitude, null)}
         />
         {renderResultView()}
+        <View style={styles.buttonContainerStyle}>
+          <View style={styles.mapButtonStyle}>
+            <TouchableOpacity onPress={() => routeToMap()}>
+              <Foundation name="marker" color="#ac8daf" size={32} />
+            </TouchableOpacity>
+          </View>
+        </View>
       </SafeAreaView>
       {renderLoadingPanel()}
     </>
@@ -144,6 +166,25 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.15,
     shadowRadius: 15,
     elevation: 10
+  },
+  buttonContainerStyle: {
+    position: "absolute",
+    bottom: 40,
+    right: 10
+  },
+  mapButtonStyle: {
+    width: 60,
+    height: 60,
+    shadowColor: "#000",
+    shadowOpacity: 0.55,
+    shadowRadius: 25,
+    elevation: 10,
+    borderRadius: 30,
+    backgroundColor: "white",
+    marginRight: 10,
+    paddingTop: 5,
+    alignItems: "center",
+    justifyContent: "center"
   }
 });
 
