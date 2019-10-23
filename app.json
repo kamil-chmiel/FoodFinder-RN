@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Food",
+    "name": "Food Finder",
     "slug": "foodApp",
     "privacy": "public",
     "sdkVersion": "34.0.0",
@@ -9,11 +9,11 @@
       "android",
       "web"
     ],
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./src/assets/logoF.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./src/assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -25,6 +25,13 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "versionCode": 2, 
+      "package": "com.limitlessapps.foodfinder",
+      "config": {
+        "googleMaps": { "apiKey": "AIzaSyA0RUyIADO_cv5cKjL9NPm3s7qpkPToTiM" }   
+      }
     }
   }
 }
